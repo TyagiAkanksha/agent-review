@@ -27,7 +27,7 @@ Consequences the skills must apply:
 | RT-ANN-2 | Tool deletes, overwrites or removes data but sets `destructiveHint: false` | Medium | MCP spec, ToolAnnotations |
 | RT-ANN-3 | `idempotentHint` or `openWorldHint` contradicts what the code or description says (for example, sends email with `openWorldHint: false`) | Low | MCP spec, ToolAnnotations |
 | RT-APR-1 | Irreversible action (delete, publish to outside users, send, pay, transfer) runs with no confirmation, elicitation or proposal step | High | MCP spec, Tools, "User Interaction Model"; *Principles of Building AI Agents*, human-in-the-loop |
-| RT-AUTH-1 | Authorization is checked once (at login or startup) instead of on every call, or a write tool does no permission check | High | OWASP Top 10 for Agentic Applications, identity and privilege abuse; MCP spec, Tools, "Security Considerations" |
+| RT-AUTH-1 | On any authentication path (bearer, cookie, API key, internal agent), authorization is checked once (at login or startup) instead of on every call, or a write tool does no permission check | High | OWASP Top 10 for Agentic Applications, identity and privilege abuse; MCP spec, Tools, "Security Considerations" |
 | RT-OVL-1 | Two or more tools do nearly the same thing, so the model will pick between them inconsistently | Medium | Anthropic, "Writing effective tools for AI agents" |
 | RT-CLR-1 | Vague tool name (`get_data`, `process`, `handle`) or missing description | Low | Anthropic, "Writing effective tools for AI agents" |
 | RT-CLR-2 | Parameter has no type, or no description when its meaning isn't obvious from the name | Low | Anthropic, "Writing effective tools for AI agents" |

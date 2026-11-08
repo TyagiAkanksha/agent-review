@@ -7,7 +7,7 @@ description: >
   Reviews tool annotations, approval steps for irreversible actions, per-call authorization,
   overlap, naming, response size and tool poisoning, and returns findings with fixes.
 metadata:
-  version: "0.1.1"
+  version: "0.1.2"
 ---
 
 # Review tools
@@ -51,7 +51,7 @@ Run every `RT-*` check in `checklist.md` against every tool:
 
 1. **Annotations (RT-ANN-1/2/3).** Compare effective hints to what the tool actually does. Never flag a missing `destructiveHint` on a write tool; the default already says destructive. Cap annotation-only findings at Medium.
 2. **Approvals (RT-APR-1).** For each Irreversible tool, look for a confirmation, an elicitation request, a proposal step, or a server-side precondition a model cannot satisfy alone. None found: High.
-3. **Authorization (RT-AUTH-1).** Look for where the caller is identified and whether that check runs on every call (middleware, a per-request dependency) or only once. Look for write tools with no permission check at all.
+3. **Authorization (RT-AUTH-1).** List every way a caller can authenticate (bearer token, session cookie, API key, an in-app agent). For each path separately, find where the caller is identified and whether the permission or allowlist check runs on every call or only once (at login, at startup). Look for write tools with no permission check at all.
 4. **Overlap (RT-OVL-1).** Compare descriptions pairwise within each verb group. Flag pairs a model could not choose between from the descriptions alone.
 5. **Clarity (RT-CLR-1/2).** Vague names, missing descriptions, untyped or undescribed parameters.
 6. **Response size (RT-SIZE-1).** Tools that can return everything with no limit, pagination or filter.

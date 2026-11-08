@@ -14,7 +14,7 @@ Patterns that look wrong but are not. Read this before reporting, and drop any f
 
 5. **Overlap that differs by scope the model can see.** `search_content` (metadata) and a separate vector search are not overlapping if both descriptions say which one to use when.
 
-6. **Authorization in middleware.** If every tool call passes through one gate that re-checks the caller (for example, a request handler that resolves the bearer token and re-checks an allowlist on every request), RT-AUTH-1 is satisfied even if individual handlers don't check.
+6. **Authorization in middleware, on every path.** If every tool call passes through one gate that re-checks the caller on every request (for example, resolving a bearer token and re-checking an allowlist), RT-AUTH-1 is satisfied for that path. List every way a caller can authenticate (bearer token, session cookie, API key, an internal agent loop) and check each one separately. A re-check on one path says nothing about the others: a cookie that is only checked at login can outlive the caller's removal by days.
 
 7. **Read tools that return a lot by design, with a limit.** A report tool that returns up to 50 grouped items with a documented cap is bounded. RT-SIZE-1 is for results with no cap at all.
 

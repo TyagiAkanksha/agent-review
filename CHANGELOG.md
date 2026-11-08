@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.2 (2026-11-07)
+
+- RT-AUTH-1: check every authentication path separately (bearer, cookie, API key, in-app agent). A run on AdvisorDesk missed a cookie-only gap because another path re-checked correctly.
+- AdvisorDesk worked example: corrected the authorization claim and recorded the first review's findings, now fixed.
+
 ## 0.1.1 (2026-11-07)
 
 - Sample server: `create_invoice` no longer overwrites existing invoices after a delete (found by the plugin itself in testing).

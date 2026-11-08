@@ -6,7 +6,7 @@ description: >
   or wants a review of model lifecycle, monitoring, secrets, prompt injection, logging and cost limits
   for an AI agent or MCP server. Returns a ranked risk list with fixes.
 metadata:
-  version: "0.1.1"
+  version: "0.1.2"
 ---
 
 # Production check

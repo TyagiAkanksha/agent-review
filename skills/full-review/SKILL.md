@@ -5,7 +5,7 @@ description: >
   MCP server", "review everything before I ship", or "run all the agent-review checks". Runs the
   review-tools and prod-check reviews on one repo and combines them into a single ranked report.
 metadata:
-  version: "0.1.1"
+  version: "0.1.2"
 ---
 
 # Full review

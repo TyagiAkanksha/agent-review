@@ -1,6 +1,6 @@
 {
   "name": "agent-review",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Design review for AI agents and MCP servers: tool design, approval steps, permissions and production readiness, with a fix for every finding.",
   "author": {
     "name": "Akanksha Tyagi",

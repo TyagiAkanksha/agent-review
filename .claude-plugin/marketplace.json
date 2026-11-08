@@ -1,0 +1,16 @@
+{
+  "name": "agent-review",
+  "owner": {
+    "name": "Akanksha Tyagi"
+  },
+  "metadata": {
+    "description": "Design review for AI agents and MCP servers."
+  },
+  "plugins": [
+    {
+      "name": "agent-review",
+      "source": "./",
+      "description": "Design review for AI agents and MCP servers: tool design, approval steps, permissions and production readiness."
+    }
+  ]
+}

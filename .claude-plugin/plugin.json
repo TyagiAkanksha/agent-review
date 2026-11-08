@@ -1,0 +1,13 @@
+{
+  "name": "agent-review",
+  "version": "0.1.0",
+  "description": "Design review for AI agents and MCP servers: tool design, approval steps, permissions and production readiness, with a fix for every finding.",
+  "author": {
+    "name": "Akanksha Tyagi",
+    "url": "https://tyagiakanksha.com"
+  },
+  "homepage": "https://github.com/TyagiAkanksha/agent-review",
+  "repository": "https://github.com/TyagiAkanksha/agent-review",
+  "license": "MIT",
+  "keywords": ["mcp", "agents", "code-review", "tool-design", "evals", "llm"]
+}

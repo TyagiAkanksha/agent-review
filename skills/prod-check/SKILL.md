@@ -6,7 +6,7 @@ description: >
   or wants a review of model lifecycle, monitoring, secrets, prompt injection, logging and cost limits
   for an AI agent or MCP server. Returns a ranked risk list with fixes.
 metadata:
-  version: "0.1.0"
+  version: "0.1.1"
 ---
 
 # Production check
@@ -25,7 +25,7 @@ Before starting, read from the plugin root (two levels up from this file): `refe
 | Check | Look in |
 | --- | --- |
 | PC-MOD-1 model lifecycle | Model IDs in code and config (strings like `claude-`, `gpt-`, `gemini-`, dated version suffixes); is there a fallback, an env var to switch, a check that fails loudly when a model is gone? |
-| PC-MON-1 monitoring | CI workflows with `schedule:` / cron, uptime checks, health endpoints and whether anything calls them, alerting config |
+| PC-MON-1 monitoring | CI workflows with `schedule:` / cron, uptime checks, health endpoints and whether anything calls them, alerting config. Only applies when the repo is deployed somewhere (see `calibration.md`, item 9) |
 | PC-SEC-1 secrets | Literal keys, tokens and passwords in code; committed `.env` files; config with credentials. Quote only the variable name and the first 4 characters, never the full secret |
 | PC-INJ-1 injection | Where untrusted text (fetched pages, emails, uploaded documents, tool results) enters the prompt, and whether write tools are callable in the same turn |
 | PC-LOG-1 logging | Whether tool calls are logged with tool name, arguments and caller |

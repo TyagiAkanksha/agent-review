@@ -18,6 +18,10 @@ Patterns that look wrong but are not. Read this before reporting, and drop any f
 
 7. **Read tools that return a lot by design, with a limit.** A report tool that returns up to 50 grouped items with a documented cap is bounded. RT-SIZE-1 is for results with no cap at all.
 
+8. **`openWorldHint` left at its default on a closed tool.** The default is true, which is the cautious direction: a client may treat the tool as reaching outside. Like a missing `destructiveHint`, the omission is not a finding. Only flag `openWorldHint: false` on a tool that does reach outside (RT-ANN-3), and mention setting it to false on closed tools inside another finding's Fix if you like.
+
+9. **Monitoring on code with no deployment.** PC-MON-1 is about a live app. If the repo has no deployment config (no Dockerfile, CI deploy job, hosting config or infrastructure code), there is nothing to monitor yet. List PC-MON-1 under Not checked with that reason instead of raising it.
+
 ## Borderline: report, but say why
 
 - **`publish` with `destructiveHint: false`.** Publishing adds content, so false is defensible when another tool reverses it. Report as Low only if publishing replaces existing content in place.

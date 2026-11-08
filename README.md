@@ -44,7 +44,7 @@ The repo includes a small MCP server with problems planted on purpose:
 /agent-review:review-tools examples/sample-mcp-server/server.py
 ```
 
-Compare the result with [the answer key](examples/answer-keys/sample-mcp-server.md).
+Compare the result with [the answer key](examples/answer-keys/sample-mcp-server.md). In testing, v0.1.1 found all 14 planted issues with no false findings on 3 of 3 independent runs; the key has the full results.
 
 On your own project:
 

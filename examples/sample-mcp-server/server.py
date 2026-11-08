@@ -8,6 +8,8 @@ Run:  pip install "mcp[cli]>=2" && python server.py   (MCP Python SDK v2)
 
 from __future__ import annotations
 
+import itertools
+
 from mcp.server.mcpserver import MCPServer
 from mcp.types import ToolAnnotations
 
@@ -24,6 +26,7 @@ CUSTOMERS: dict[str, dict] = {
     "c-2": {"name": "Globex", "email": "ap@globex.example"},
 }
 ARCHIVE: dict[str, dict] = {}
+NEXT_INVOICE_NUMBER = itertools.count(3)
 OUTBOX: list[dict] = []
 
 CURRENT_USER: str | None = None
@@ -80,7 +83,7 @@ def get_data(x: str):
 @mcp.tool(annotations=ToolAnnotations(readOnlyHint=False, destructiveHint=False))
 def create_invoice(customer_id: str, amount: int) -> str:
     """Create a new open invoice for a customer. Amount is in whole US dollars."""
-    new_id = f"inv-{len(INVOICES) + 1:03d}"
+    new_id = f"inv-{next(NEXT_INVOICE_NUMBER):03d}"
     INVOICES[new_id] = {"customer": customer_id, "amount": amount, "status": "open"}
     return new_id
 

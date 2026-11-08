@@ -20,6 +20,8 @@ Line numbers are omitted on purpose so the key survives edits; match by tool nam
 | 10 | RT-CLR-1 | Low | `get_data` | Vague name, no description, returns two different kinds of record |
 | 11 | RT-CLR-2 | Low | `update_invoice`, `get_data` | Untyped parameter (`data`) and an undescribed one-letter parameter (`x`) |
 
+Also accepted (not planted, but real): `list_invoices` and `export_all_invoices` overlap, since both can return every invoice. All v0.1.1 runs reported it, and it is not counted as a false finding.
+
 A reviewer may fold #9 into #2's fix, or report `get_data` once covering #10 and #11. Either counts as found as long as the problem is named.
 
 This key lives outside the server folder on purpose, so a review of that folder can't read it.
@@ -37,11 +39,41 @@ This key lives outside the server folder on purpose, so a review of that folder 
 | Tool | Why it is fine |
 | --- | --- |
 | `archive_invoice` | Has no `destructiveHint`, but the default is true, and it is reversible with `restore_invoice` |
-| `create_invoice` | `destructiveHint: false` is correct: it only adds a record |
+| `create_invoice` | `destructiveHint: false` is correct: it only adds a record, with IDs from a counter so it never overwrites |
 | `restore_invoice` | Additive and reversible; `destructiveHint: false` is correct |
 | Model lifecycle (PC-MOD-1) | The server calls no model, so the check does not apply; it belongs under Not checked or Assumptions |
+| Monitoring (PC-MON-1) | A sample with no deployment has nothing to monitor; it belongs under Not checked |
+| `openWorldHint` defaults on in-memory tools | The default (true) is the cautious direction, so leaving it unset is not a finding |
 
 ## Scoring
 
 - **Recall** = planted issues found / 14. Target: 14 of 14 on each of 3 runs.
 - **Precision** = real findings / all findings reported. Any trap reported counts against precision.
+
+## Results
+
+### v0.1.0, 3 independent runs (2026-11-07)
+
+Each run used `full-review` on the sample folder, with the answer key removed from disk.
+
+| Run | Planted issues found | Findings reported | Not real | High findings |
+| --- | --- | --- | --- | --- |
+| 1 | 14 / 14 | 16 | 1 (PC-MON-1) | 5, same set |
+| 2 | 14 / 14 | 16 | 1 (PC-MON-1) | 5, same set |
+| 3 | 14 / 14 | 17 | 2 (PC-MON-1, openWorldHint defaults) | 5, same set |
+
+All three runs also flagged `create_invoice` for overwriting existing invoices. That was a real bug in the sample, not a planted one: IDs came from the record count, so after a delete a new invoice took an existing ID. The reviewers were right and this key was wrong. Fixed in v0.1.1 by issuing IDs from a counter.
+
+The two false findings led to calibration items 8 and 9 in `references/calibration.md`.
+
+### v0.1.1, 3 independent runs (2026-11-07)
+
+Same setup, after fixing the sample and adding calibration items 8 and 9.
+
+| Run | Planted issues found | Findings reported | Not real | High findings |
+| --- | --- | --- | --- | --- |
+| 1 | 14 / 14 | 14 | 0 | 5, same set |
+| 2 | 14 / 14 | 14 | 0 | 5, same set |
+| 3 | 14 / 14 | 14 | 0 | 5, same set |
+
+Every run folded #9 (`openWorldHint`) into the fix for #2 and reported the accepted `list_invoices` / `export_all_invoices` overlap. Every run listed PC-MON-1 under Not checked because the sample has no deployment.

@@ -7,7 +7,7 @@ description: >
   Reviews tool annotations, approval steps for irreversible actions, per-call authorization,
   overlap, naming, response size and tool poisoning, and returns findings with fixes.
 metadata:
-  version: "0.1.0"
+  version: "0.1.1"
 ---
 
 # Review tools
